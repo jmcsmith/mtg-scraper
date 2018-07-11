@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EE76B46A20F659C4004ECE4A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE76B46920F659C4004ECE4A /* main.swift */; };
+		EE76B47120F65B08004ECE4A /* Scraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE76B47020F65B08004ECE4A /* Scraper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		EE76B46620F659C4004ECE4A /* mtg-scraper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "mtg-scraper"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE76B46920F659C4004ECE4A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		EE76B47020F65B08004ECE4A /* Scraper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scraper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				EE76B46920F659C4004ECE4A /* main.swift */,
+				EE76B47020F65B08004ECE4A /* Scraper.swift */,
 			);
 			path = "mtg-scraper";
 			sourceTree = "<group>";
@@ -119,6 +122,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE76B47120F65B08004ECE4A /* Scraper.swift in Sources */,
 				EE76B46A20F659C4004ECE4A /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,6 +250,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JANZDS5D43;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
@@ -256,6 +261,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JANZDS5D43;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};

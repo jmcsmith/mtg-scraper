@@ -1,5 +1,5 @@
 //
-//  main.swift
+//  Scraper.swift
 //  mtg-scraper
 //
 //  Created by Joseph Smith on 7/11/18.
@@ -8,6 +8,9 @@
 
 import Foundation
 
-let scraper = Scraper()
-scraper.scrape()
-
+class Scraper{
+    
+    func scrape() {
+        print("scrape")
+    }
+}
