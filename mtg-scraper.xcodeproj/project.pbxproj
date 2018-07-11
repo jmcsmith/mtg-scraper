@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		EE76B46A20F659C4004ECE4A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE76B46920F659C4004ECE4A /* main.swift */; };
 		EE76B47120F65B08004ECE4A /* Scraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE76B47020F65B08004ECE4A /* Scraper.swift */; };
+		EE76B47320F65CC5004ECE4A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE76B47220F65CC5004ECE4A /* Constants.swift */; };
+		EE76B47520F660E7004ECE4A /* SearchPageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE76B47420F660E7004ECE4A /* SearchPageParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +29,8 @@
 		EE76B46620F659C4004ECE4A /* mtg-scraper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "mtg-scraper"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE76B46920F659C4004ECE4A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		EE76B47020F65B08004ECE4A /* Scraper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scraper.swift; sourceTree = "<group>"; };
+		EE76B47220F65CC5004ECE4A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EE76B47420F660E7004ECE4A /* SearchPageParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 			children = (
 				EE76B46920F659C4004ECE4A /* main.swift */,
 				EE76B47020F65B08004ECE4A /* Scraper.swift */,
+				EE76B47220F65CC5004ECE4A /* Constants.swift */,
+				EE76B47420F660E7004ECE4A /* SearchPageParser.swift */,
 			);
 			path = "mtg-scraper";
 			sourceTree = "<group>";
@@ -123,7 +129,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE76B47120F65B08004ECE4A /* Scraper.swift in Sources */,
+				EE76B47520F660E7004ECE4A /* SearchPageParser.swift in Sources */,
 				EE76B46A20F659C4004ECE4A /* main.swift in Sources */,
+				EE76B47320F65CC5004ECE4A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
