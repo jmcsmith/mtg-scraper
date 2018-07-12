@@ -11,6 +11,7 @@
 		EE76B47120F65B08004ECE4A /* Scraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE76B47020F65B08004ECE4A /* Scraper.swift */; };
 		EE76B47320F65CC5004ECE4A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE76B47220F65CC5004ECE4A /* Constants.swift */; };
 		EE76B47520F660E7004ECE4A /* SearchPageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE76B47420F660E7004ECE4A /* SearchPageParser.swift */; };
+		EE76B47720F7B09B004ECE4A /* CardPageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE76B47620F7B09B004ECE4A /* CardPageParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,7 @@
 		EE76B47020F65B08004ECE4A /* Scraper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scraper.swift; sourceTree = "<group>"; };
 		EE76B47220F65CC5004ECE4A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EE76B47420F660E7004ECE4A /* SearchPageParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageParser.swift; sourceTree = "<group>"; };
+		EE76B47620F7B09B004ECE4A /* CardPageParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPageParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				EE76B47020F65B08004ECE4A /* Scraper.swift */,
 				EE76B47220F65CC5004ECE4A /* Constants.swift */,
 				EE76B47420F660E7004ECE4A /* SearchPageParser.swift */,
+				EE76B47620F7B09B004ECE4A /* CardPageParser.swift */,
 			);
 			path = "mtg-scraper";
 			sourceTree = "<group>";
@@ -128,6 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE76B47720F7B09B004ECE4A /* CardPageParser.swift in Sources */,
 				EE76B47120F65B08004ECE4A /* Scraper.swift in Sources */,
 				EE76B47520F660E7004ECE4A /* SearchPageParser.swift in Sources */,
 				EE76B46A20F659C4004ECE4A /* main.swift in Sources */,

@@ -17,14 +17,23 @@ class Scraper{
         print("scrape")
         print(Constants.searchURL)
         sets = getSetListFromSearch()
-        print(sets)
+//        print(sets)
+        parseCardByMultiverseId(multiverseId: 439787)
     }
     
     func getSetListFromSearch() -> [String] {
         let parser = SearchPageParser()
         return parser.parseSearchPage()
     }
-    
+    func parseCardByMultiverseId(multiverseId: Int) {
+        let parser = CardPageParser()
+        guard let myURL = URL(string: Constants.cardURL + multiverseId.description) else {
+            print("Error: \(Constants.cardURL) doesn't seem to be a valid URL")
+            return
+        }
+        print(myURL)
+        parser.parseCardPage(url: myURL)
+    }
     
     
 }

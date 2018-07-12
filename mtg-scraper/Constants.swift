@@ -10,4 +10,5 @@ import Foundation
 
 class Constants {
     static let searchURL = "http://gatherer.wizards.com/Pages/Default.aspx"
+    static let cardURL = "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid="
 }

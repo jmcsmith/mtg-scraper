@@ -32,7 +32,7 @@ class SearchPageParser: NSObject, XMLParserDelegate {
             isInSets = true
         }
         if elementName == "option" && isInSets {
-            print(attributeDict["value"] ?? "")
+            //print(attributeDict["value"] ?? "")
             if let s = attributeDict["value"] {
                 if s != "" {
                     sets.append(s)
