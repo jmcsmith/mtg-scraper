@@ -18,7 +18,11 @@ class Scraper{
         print(Constants.searchURL)
         sets = getSetListFromSearch()
 //        print(sets)
-        parseCardByMultiverseId(multiverseId: 439787)
+        //parseCardByMultiverseId(multiverseId: 439787)
+        //parseCardByMultiverseId(multiverseId: 1)
+        for i in 1...439787 {
+            parseCardByMultiverseId(multiverseId: i)
+        }
     }
     
     func getSetListFromSearch() -> [String] {

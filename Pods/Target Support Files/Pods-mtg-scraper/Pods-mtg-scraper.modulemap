@@ -1,0 +1,6 @@
+module Pods_mtg_scraper {
+  umbrella header "Pods-mtg-scraper-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -7,36 +7,33 @@
 //
 
 import Foundation
+import SwiftSoup
 
-class CardPageParser: NSObject, XMLParserDelegate {
+class CardPageParser{
     
     var isInName = false
     
     func parseCardPage(url: URL){
         let s = try? String(contentsOf: url)
-        //print(s)
-        let parser = XMLParser(contentsOf: url)
-        
-        parser?.delegate = self
-        parser?.parse()
+   
+        do {
+            let doc: Document = try SwiftSoup.parse(s!)
+            let srcs: Elements = try doc.select("div")
+            for element: Element in srcs.array() {
+                if try! element.attr("id") == "ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_nameRow" {
+                    //print("found it")
+                    let name = try element.children().select("div").select("[class='value']").text()
+                    //print(name.array()[0])
+                    print(name)
+                }
+                
+            }
+            // do something with srcsStringArray
+        } catch Exception.Error(_, let message) {
+            print(message)
+        } catch {
+            print("error")
+        }
     }
     
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        
-        if attributeDict["id"]?.range(of: "SubContent_nameRow") != nil {
-            isInName = true
-        }
-        if attributeDict["class"] == "value" {
-            print(attributeDict)
-        }
-        if let id = attributeDict["class"] {
-            print(elementName + " : " + id)
-        }
-    }
-    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        //        if elementName == "div" && isInName {
-        //            isInName = false
-        //        }
-        //print(qName)
-    }
 }

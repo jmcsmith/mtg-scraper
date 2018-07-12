@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5DA86DA3C580062A6AD9BDBC /* libPods-mtg-scraper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D65D220CABE7BE43FC4FA0F4 /* libPods-mtg-scraper.a */; };
 		EE76B46A20F659C4004ECE4A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE76B46920F659C4004ECE4A /* main.swift */; };
 		EE76B47120F65B08004ECE4A /* Scraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE76B47020F65B08004ECE4A /* Scraper.swift */; };
 		EE76B47320F65CC5004ECE4A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE76B47220F65CC5004ECE4A /* Constants.swift */; };
@@ -27,6 +28,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0272D597B8B7AC451722C018 /* Pods-mtg-scraper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtg-scraper.release.xcconfig"; path = "Pods/Target Support Files/Pods-mtg-scraper/Pods-mtg-scraper.release.xcconfig"; sourceTree = "<group>"; };
+		D20DAFAACD95CBC8CFEF1454 /* Pods-mtg-scraper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mtg-scraper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mtg-scraper/Pods-mtg-scraper.debug.xcconfig"; sourceTree = "<group>"; };
+		D65D220CABE7BE43FC4FA0F4 /* libPods-mtg-scraper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mtg-scraper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE76B46620F659C4004ECE4A /* mtg-scraper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "mtg-scraper"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE76B46920F659C4004ECE4A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		EE76B47020F65B08004ECE4A /* Scraper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scraper.swift; sourceTree = "<group>"; };
@@ -40,17 +44,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DA86DA3C580062A6AD9BDBC /* libPods-mtg-scraper.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5734F8FD6C2AD622CD4045B7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D20DAFAACD95CBC8CFEF1454 /* Pods-mtg-scraper.debug.xcconfig */,
+				0272D597B8B7AC451722C018 /* Pods-mtg-scraper.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7D15D5823FDE74B09CEB3035 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D65D220CABE7BE43FC4FA0F4 /* libPods-mtg-scraper.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EE76B45D20F659C4004ECE4A = {
 			isa = PBXGroup;
 			children = (
 				EE76B46820F659C4004ECE4A /* mtg-scraper */,
 				EE76B46720F659C4004ECE4A /* Products */,
+				5734F8FD6C2AD622CD4045B7 /* Pods */,
+				7D15D5823FDE74B09CEB3035 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,6 +105,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EE76B46D20F659C4004ECE4A /* Build configuration list for PBXNativeTarget "mtg-scraper" */;
 			buildPhases = (
+				7D5682050326AC483A0DBEA8 /* [CP] Check Pods Manifest.lock */,
 				EE76B46220F659C4004ECE4A /* Sources */,
 				EE76B46320F659C4004ECE4A /* Frameworks */,
 				EE76B46420F659C4004ECE4A /* CopyFiles */,
@@ -125,6 +150,27 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7D5682050326AC483A0DBEA8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-mtg-scraper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EE76B46220F659C4004ECE4A /* Sources */ = {
@@ -259,6 +305,7 @@
 		};
 		EE76B46E20F659C4004ECE4A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D20DAFAACD95CBC8CFEF1454 /* Pods-mtg-scraper.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JANZDS5D43;
@@ -270,6 +317,7 @@
 		};
 		EE76B46F20F659C4004ECE4A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0272D597B8B7AC451722C018 /* Pods-mtg-scraper.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JANZDS5D43;
