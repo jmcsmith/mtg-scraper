@@ -38,6 +38,7 @@ class Scraper{
         print(myURL)
         parser.parseCardPage(url: myURL)
     }
+
     
     
 }

@@ -18,12 +18,11 @@ class CardPageParser{
    
         do {
             let doc: Document = try SwiftSoup.parse(s!)
-            let srcs: Elements = try doc.select("div")
-            var n = try doc.select("[id='ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_nameRow']").first()?.children().select("[class='value']").text()
+            let n = try doc.select("[id='ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_nameRow']").first()?.children().select("[class='value']").text()
             print(n!)
-            var cmc = try doc.select("[id='ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_cmcRow']").first()?.children().select("[class='value']").text()
+            let cmc = try doc.select("[id='ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_cmcRow']").first()?.children().select("[class='value']").text()
             print(cmc!)
-            var types = try doc.select("[id='ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_typeRow']").first()?.children().select("[class='value']").text()
+            let types = try doc.select("[id='ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_typeRow']").first()?.children().select("[class='value']").text()
             print(types!)
             // do something with srcsStringArray
         } catch Exception.Error(_, let message) {
@@ -32,5 +31,5 @@ class CardPageParser{
             print("error")
         }
     }
-    
+
 }
