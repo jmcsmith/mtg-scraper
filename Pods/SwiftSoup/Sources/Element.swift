@@ -11,6 +11,11 @@ import Foundation
 open class Element: Node {
 	var _tag: Tag
 
+    private static let classString = "class"
+    private static let emptyString = ""
+    private static let idString = "id"
+    private static let rootString = "#root"
+
     //private static let classSplit : Pattern = Pattern("\\s+")
 	private static let classSplit = "\\s+"
 
@@ -50,6 +55,9 @@ open class Element: Node {
      */
     open func tagName() -> String {
         return _tag.getName()
+    }
+    open func tagNameNormal() -> String {
+        return _tag.getNameNormal()
     }
 
     /**
@@ -91,11 +99,11 @@ open class Element: Node {
      * @return The id attribute, if present, or an empty string if not.
      */
     open func id() -> String {
-        guard let attributes = attributes else {return ""}
+        guard let attributes = attributes else {return Element.emptyString}
         do {
-            return try attributes.getIgnoreCase(key: "id")
+            return try attributes.getIgnoreCase(key: Element.idString)
         } catch {}
-        return ""
+        return Element.emptyString
     }
 
     /**
@@ -159,7 +167,7 @@ open class Element: Node {
 
     private static func accumulateParents(_ el: Element, _ parents: Elements) {
         let parent: Element? = el.parent()
-        if (parent != nil && !(parent!.tagName() == "#root")) {
+        if (parent != nil && !(parent!.tagName() == Element.rootString)) {
             parents.add(parent!)
             accumulateParents(parent!, parents)
         }
@@ -268,16 +276,16 @@ open class Element: Node {
     public func select(_ cssQuery: String)throws->Elements {
         return try Selector.select(cssQuery, self)
     }
-    
+
     /**
      * Check if this element matches the given {@link Selector} CSS query.
      * @param cssQuery a {@link Selector} CSS query
      * @return if this element matches the query
      */
     public func iS(_ cssQuery: String)throws->Bool {
-        return try iS(QueryParser.parse(cssQuery));
+        return try iS(QueryParser.parse(cssQuery))
     }
-    
+
     /**
      * Check if this element matches the given {@link Selector} CSS query.
      * @param cssQuery a {@link Selector} CSS query
@@ -285,14 +293,10 @@ open class Element: Node {
      */
     public func iS(_ evaluator: Evaluator)throws->Bool {
         guard let od = self.ownerDocument() else {
-            return false;
+            return false
         }
-        return try evaluator.matches(od, self);
+        return try evaluator.matches(od, self)
     }
-
-    
-    
-    
 
     /**
      * Add a node child node to this element.
@@ -500,30 +504,32 @@ open class Element: Node {
      * @return the CSS Path that can be used to retrieve the element in a selector.
      */
     public func cssSelector()throws->String {
-        if (id().characters.count > 0) {
-            return "#" + id()
+        let elementId = id()
+        if (elementId.count > 0) {
+            return "#" + elementId
         }
 
         // Translate HTML namespace ns:tag to CSS namespace syntax ns|tag
         let tagName: String = self.tagName().replacingOccurrences(of: ":", with: "|")
-        let selector: StringBuilder = StringBuilder(string: tagName)
+        var selector: String = tagName
         let cl = try classNames()
         let classes: String = cl.joined(separator: ".")
-        if (classes.characters.count > 0) {
-            selector.append(".").append(classes)
+        if (classes.count > 0) {
+            selector.append(".")
+            selector.append(classes)
         }
 
         if (parent() == nil || ((parent() as? Document) != nil)) // don't add Document to selector, as will always have a html node
         {
-            return selector.toString()
+            return selector
         }
 
-        selector.insert(0, " > ")
-        if (try parent()!.select(selector.toString()).array().count > 1) {
+        selector.insert(contentsOf: " > ", at: selector.startIndex)
+        if (try parent()!.select(selector).array().count > 1) {
             selector.append(":nth-child(\(try elementSiblingIndex() + 1))")
         }
 
-        return try parent()!.cssSelector() + (selector.toString())
+        return try parent()!.cssSelector() + (selector)
     }
 
     /**
@@ -1045,7 +1051,7 @@ open class Element: Node {
      * @return The literal class attribute, or <b>empty string</b> if no class attribute set.
      */
     public func className()throws->String {
-        return try attr("class").trim()
+        return try attr(Element.classString).trim()
     }
 
     /**
@@ -1055,10 +1061,10 @@ open class Element: Node {
      * @return set of classnames, empty if no class attribute
      */
 	public func classNames()throws->OrderedSet<String> {
-		let fitted = try className().replaceAll(of: Element.classSplit, with: " ", options:.caseInsensitive)
+		let fitted = try className().replaceAll(of: Element.classSplit, with: " ", options: .caseInsensitive)
 		let names: [String] = fitted.components(separatedBy: " ")
-		let classNames: OrderedSet<String> = OrderedSet(sequence:names)
-		classNames.remove("") // if classNames() was empty, would include an empty class
+		let classNames: OrderedSet<String> = OrderedSet(sequence: names)
+		classNames.remove(Element.emptyString) // if classNames() was empty, would include an empty class
 		return classNames
 	}
 
@@ -1069,7 +1075,7 @@ open class Element: Node {
      */
     @discardableResult
     public func classNames(_ classNames: OrderedSet<String>)throws->Element {
-        try attributes?.put("class", StringUtil.join(classNames, sep: " "))
+        try attributes?.put(Element.classString, StringUtil.join(classNames, sep: " "))
         return self
     }
 
@@ -1080,9 +1086,9 @@ open class Element: Node {
      */
     // performance sensitive
     public func hasClass(_ className: String) -> Bool {
-        let classAtt: String? = attributes?.get(key: "class")
-        let len: Int = (classAtt != nil) ? classAtt!.characters.count : 0
-        let wantLen: Int = className.characters.count
+        let classAtt: String? = attributes?.get(key: Element.classString)
+        let len: Int = (classAtt != nil) ? classAtt!.count : 0
+        let wantLen: Int = className.count
 
         if (len == 0 || len < wantLen) {
             return false
@@ -1283,10 +1289,7 @@ open class Element: Node {
 	}
 
 	override public var hashValue: Int {
-		var h = super.hashValue
-		//h = Int.addWithOverflow(Int.multiplyWithOverflow(31, h).0, _tag.hashValue).0
-        h = 31.multipliedReportingOverflow(by: h).0.addingReportingOverflow(_tag.hashValue).0
-		return h
+		return super.hashValue ^ _tag.hashValue
 	}
 
 }

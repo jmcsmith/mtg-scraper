@@ -88,11 +88,11 @@ open class StringUtil {
      * @return if string is blank
      */
     public static func isBlank(_ string: String) -> Bool {
-        if (string.characters.count == 0) {
+        if (string.count == 0) {
             return true
         }
 
-        for chr in string.characters {
+        for chr in string {
             if (!StringUtil.isWhitespace(chr)) {
                 return false
             }
@@ -106,11 +106,11 @@ open class StringUtil {
      * @return true if only digit chars, false if empty or null or contains non-digit chrs
      */
     public static func isNumeric(_ string: String) -> Bool {
-        if (string.characters.count == 0) {
+        if (string.count == 0) {
             return false
         }
 
-        for chr in string.characters {
+        for chr in string {
             if !("0"..."9" ~= chr) {
                 return false
             }
@@ -146,11 +146,11 @@ open class StringUtil {
      * @param string string to normalize whitespace within
      * @param stripLeading set to true if you wish to remove any leading whitespace
      */
-    open static func appendNormalisedWhitespace(_ accum: StringBuilder, string: String, stripLeading: Bool ) {
+    public static func appendNormalisedWhitespace(_ accum: StringBuilder, string: String, stripLeading: Bool ) {
         var lastWasWhite: Bool = false
         var reachedNonWhite: Bool  = false
 
-        for c in string.characters {
+        for c in string {
             if (isWhitespace(c)) {
                 if ((stripLeading && !reachedNonWhite) || lastWasWhite) {
                     continue
@@ -165,10 +165,10 @@ open class StringUtil {
         }
     }
 
-    open static func inString(_ needle: String?, haystack: String...) -> Bool {
+    public static func inString(_ needle: String?, haystack: String...) -> Bool {
         return inString(needle, haystack)
     }
-    open static func inString(_ needle: String?, _ haystack: [String?]) -> Bool {
+    public static func inString(_ needle: String?, _ haystack: [String?]) -> Bool {
         if(needle == nil) {return false}
         for hay in haystack {
             if(hay != nil  && hay! == needle!) {
@@ -210,12 +210,12 @@ open class StringUtil {
      * @throws MalformedURLException if an error occurred generating the URL
      */
     //NOTE: Not sure it work
-    open static func resolve(_ base: URL, relUrl: String ) -> URL? {
+    public static func resolve(_ base: URL, relUrl: String ) -> URL? {
         var base = base
-        if(base.pathComponents.count == 0 && base.absoluteString.characters.last != "/" && !base.isFileURL) {
+        if(base.pathComponents.count == 0 && base.absoluteString.last != "/" && !base.isFileURL) {
             base = base.appendingPathComponent("/", isDirectory: false)
         }
-        let u =  URL(string: relUrl, relativeTo : base)
+        let u =  URL(string: relUrl, relativeTo: base)
         return u
     }
 
@@ -225,7 +225,7 @@ open class StringUtil {
      * @param relUrl the relative URL to resolve. (If it's already absolute, it will be returned)
      * @return an absolute URL if one was able to be generated, or the empty string if not
      */
-    open static func resolve(_ baseUrl: String, relUrl: String ) -> String {
+    public static func resolve(_ baseUrl: String, relUrl: String ) -> String {
 
         let base = URL(string: baseUrl)
 

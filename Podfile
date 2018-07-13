@@ -8,5 +8,5 @@ target 'mtg-scraper' do
   # use_frameworks!
 
   # Pods for mtg-scraper
-  pod 'SwiftSoup'
+pod 'SwiftSoup', '~> 1.7'
 end

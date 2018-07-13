@@ -11,7 +11,7 @@ import Foundation
 open class TokenQueue {
     private var queue: String
     private var pos: Int = 0
-
+    private static let empty: Character = Character(UnicodeScalar(0))
     private static let ESC: Character = "\\" // escape char for chomp balanced.
 
     /**
@@ -31,7 +31,7 @@ open class TokenQueue {
     }
 
     private func remainingLength() -> Int {
-        return queue.characters.count - pos
+        return queue.count - pos
     }
 
     /**
@@ -66,7 +66,7 @@ open class TokenQueue {
      * @return true if the next characters match.
      */
     open func matches(_ seq: String) -> Bool {
-        return queue.regionMatches(true, pos, seq, 0, seq.characters.count)
+        return queue.regionMatches(true, pos, seq, 0, seq.count)
     }
 
     /**
@@ -122,7 +122,7 @@ open class TokenQueue {
     @discardableResult
     open func matchChomp(_ seq: String) -> Bool {
         if (matches(seq)) {
-            pos += seq.characters.count
+            pos += seq.count
             return true
         } else {
             return false
@@ -175,7 +175,7 @@ open class TokenQueue {
             //throw new IllegalStateException("Queue did not match expected sequence")
             throw Exception.Error(type: ExceptionType.IllegalArgumentException, Message: "Queue did not match expected sequence")
         }
-        let len = seq.characters.count
+        let len = seq.count
         if (len > remainingLength()) {
             //throw new IllegalStateException("Queue not long enough to consume sequence")
             throw Exception.Error(type: ExceptionType.IllegalArgumentException, Message: "Queue not long enough to consume sequence")
@@ -194,7 +194,7 @@ open class TokenQueue {
         let offset = queue.indexOf(seq, pos)
         if (offset != -1) {
             let consumed = queue.substring(pos, offset-pos)
-            pos += consumed.characters.count
+            pos += consumed.count
             return consumed
         } else {
             //return remainder()
@@ -215,7 +215,7 @@ open class TokenQueue {
                 if (skip == 0) { // this char is the skip char, but not match, so force advance of pos
                     pos+=1
                 } else if (skip < 0) { // no chance of finding, grab to end
-                    pos = queue.characters.count
+                    pos = queue.count
                 } else {
                     pos += skip
                 }
@@ -278,13 +278,13 @@ open class TokenQueue {
         var start = -1
         var end = -1
         var depth = 0
-        var last: Character = Character(UnicodeScalar(0))
+        var last: Character = TokenQueue.empty
         var inQuote = false
 
         repeat {
             if (isEmpty()) {break}
             let c = consume()
-            if (last.unicodeScalar.value == 0 || last != TokenQueue.ESC) {
+            if (last == TokenQueue.empty || last != TokenQueue.ESC) {
                 if ((c=="'" || c=="\"") && c != open) {
                     inQuote = !inQuote
                 }
@@ -301,7 +301,7 @@ open class TokenQueue {
                 }
             }
 
-            if (depth > 0 && last.unicodeScalar.value != 0) {
+            if (depth > 0 && last != TokenQueue.empty) {
                 end = pos // don't include the outer match pair in the return
             }
             last = c
@@ -316,10 +316,10 @@ open class TokenQueue {
      */
     public static func unescape(_ input: String) -> String {
         let out = StringBuilder()
-        var last = Character(UnicodeScalar(0))
-        for c in input.characters {
+        var last = empty
+        for c in input {
             if (c == ESC) {
-                if (last.unicodeScalar.value != 0 && last == TokenQueue.ESC) {
+                if (last != empty && last == TokenQueue.ESC) {
                     out.append(c)
                 }
             } else {
@@ -417,8 +417,8 @@ open class TokenQueue {
      @return remained of queue.
      */
     open func remainder() -> String {
-        let remainder = queue.substring(pos, queue.characters.count-pos)
-        pos = queue.characters.count
+        let remainder = queue.substring(pos, queue.count-pos)
+        pos = queue.count
         return remainder
     }
 
